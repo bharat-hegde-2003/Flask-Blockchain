@@ -1,0 +1,70 @@
+<!-- blockchain_view.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Data</title>
+    <style>
+        /* Optional: Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blockchain Data</h1>
+    {% if blocks %}
+    <table>
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Timestamp</th>
+                <th>Action</th>
+                <th>Name</th>
+                <th>Method</th>
+                <th>Amount</th>
+                <th>Card Number</th>
+                <th>Date</th>
+                <th>Proof</th>
+                <th>Previous Hash</th>
+                <th>Hash</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for block in blocks %}
+            <tr>
+                <td>{{ block.index }}</td>
+                <td>{{ block.timestamp }}</td>
+                <td>{{ block.action }}</td>
+                <td>{{ block.name }}</td>
+                <td>{{ block.method }}</td>
+                <td>{{ block.amount }}</td>
+                <td>{{ block.card_num }}</td>
+                <td>{{ block.date }}</td>
+                <td>{{ block.proof }}</td>
+                <td>{{ block.previous_hash }}</td>
+                <td>{{ block.hash }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No blockchain data found.</p>
+    {% endif %}
+</body>
+</html>

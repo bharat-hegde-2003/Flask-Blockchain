@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Project Detail</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff; /* White background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow */
+        }
+        h1, h3 {
+            color: #007bff; /* Bootstrap primary color */
+        }
+        .btn-back {
+            margin-bottom: 20px;
+        }
+        .volunteer-list {
+            list-style-type: none; /* Remove default list styling */
+            padding-left: 0; /* Remove left padding */
+        }
+        .volunteer-list li {
+            margin-bottom: 10px;
+            border: 1px solid #ddd; /* Gray border */
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ project.title }}</h1>
+        <p>{{ project.description }}</p>
+        <p>Date: {{ project.date }}</p>
+        <a href="/volunteer_dashboard/" class="btn btn-secondary btn-back">Back to Dashboard</a>
+        
+        <h3 class="mt-4 mb-3">Enlisted Volunteers:</h3>
+        <ul class="volunteer-list">
+            {% for volunteer in project.volunteers.all %}
+            <li>{{ volunteer.name }} ({{ volunteer.email }})</li>
+            {% empty %}
+            <li>No volunteers enlisted yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

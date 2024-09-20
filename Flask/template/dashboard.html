@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('/static/b2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: black;
+            text-shadow: 1px 1px 2px #000000;
+        }
+
+        .container {
+            padding: 50px;
+            background: rgba(84, 78, 78, 0.7);
+            margin: 50px auto;
+            border-radius: 10px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, .section-title {
+            font-size: 3em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center; /* Center align section titles */
+        }
+
+        .card {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(84, 78, 78, 0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .progress {
+            height: 30px;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+
+        .nav-link:hover {
+            color: #74ebd5 !important;
+        }
+
+    .footer {
+    padding: 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 100%;
+    margin-top: 20px; /* Add some margin at the top for spacing */
+}
+
+
+        .btn-primary {
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            border: none;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #9face6, #74ebd5);
+        }
+
+        .search-bar {
+            position: relative;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .search-bar input[type="text"]:focus {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-bar .fa-search {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9face6;
+        }
+        .search-results {
+            position: absolute;
+            width: 100%;
+            background: white;
+            color: black;
+            max-height: 150px;
+            overflow-y: auto;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-results a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            transition: background 0.3s;
+        }
+
+        .search-results a:hover {
+            background: #f0f0f0;
+        }
+
+        .social-feed {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .feedback-form {
+            margin-top: 30px;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .feedback-form button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #74ebd5;
+            color: #ffffff;
+            font-size: 1em;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .feedback-form button:hover {
+            background-color: #9face6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">Charity App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+             <a class="btn btn-danger" href="/logout_view/">Logout</a>
+              </li>
+               
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">Welcome to the Charity Chain</h1>
+
+        <!-- Search Bar -->
+       <div class="search-bar">
+            <input type="text" placeholder="Search..." id="search">
+            <i class="fa fa-search"></i>
+            <div class="search-results" id="search-results"></div>
+        </div>
+
+        <!-- Main Sections -->
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/static/transaction.jpg" class="card-img-top" alt="Dashboard Icon">
+                    <div class="card-body">
+                        <h5 class="card-title">New Transaction</h5>
+                        <p class="card-text">Click here to add a new transaction.</p>
+                        <a href="/formhandle/" class="btn btn-primary">New Transaction</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/static/list.jpg" class="card-img-top" alt="Transaction List Icon">
+                    <div class="card-body">
+                        <h5 class="card-title">Transaction List</h5>
+                        <p class="card-text">View all transactions.</p>
+                        <a href="/show/" class="btn btn-primary">Transaction List</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/static/a1.jpg" class="card-img-top" alt="Public Ledger Icon">
+                    <div class="card-body">
+                        <h5 class="card-title">Public Ledger</h5>
+                        <p class="card-text">Explore the public ledger.</p>
+                        <a href="{% url 'blockchain_view' %}" class="btn btn-primary">Public Ledger</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/static/b2.jpg" class="card-img-top" alt="Volunteering Icon">
+                    <div class="card-body">
+                        <h5 class="card-title">Volunteer Opportunity</h5>
+                        <p class="card-text">Enlist yourself and help us in our cause.</p>
+                        <a href="/volunteer_dashboard/" class="btn btn-primary">Volunteer Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/static/blockchain_image.jpg" class="card-img-top" alt="Volunteering Icon">
+                    <div class="card-body">
+                        <h5 class="card-title">Compare Data</h5>
+                        <p class="card-text">Check this page for any Changes in the actual data</p>
+                        <a href="/compare_blockchain_with_data/" class="btn btn-primary">Check</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/static/form.png" class="card-img-top" alt="Volunteering Icon">
+                    <div class="card-body">
+                        <h5 class="card-title">JSON File</h5>
+                        <p class="card-text">All the data listed in the block chain</p>
+                        <a href="/blockchain_json/" class="btn btn-primary">JSON </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/static/list.jpg" class="card-img-top" alt="Transaction List Icon">
+                    <div class="card-body">
+                        <h5 class="card-title">P2P network</h5>
+                        <p class="card-text">View all nodes.</p>
+                        <a href="/p2p_network/" class="btn btn-primary">P2P</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel for Highlights -->
+        <div id="highlightsCarousel" class="carousel slide mt-5" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/static/h7.jpg" class="d-block w-100" alt="Highlight 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Impactful Donation Drives</h5>
+                        <p>Your contributions make a significant difference.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/static/h5.jpg" class="d-block w-100" alt="Highlight 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/static/h4.jpg" class="d-block w-100" alt="Highlight 3">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#highlightsCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#highlightsCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+       
+        
+       
+        <!-- Social Media Feed -->
+        <div class="mb-5">
+            <h2 class="section-title">Social Media Feed</h2>
+            <div class="social-feed">
+                <!-- Example social media feed. Replace with actual social media integration -->
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@charity_org</h5>
+                        <p class="card-text">Check out our latest campaign! #Charity #GivingBack</p>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@charity_org</h5>
+                        <p class="card-text">Thank you to all our volunteers for their amazing support! #VolunteersRock</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources and FAQs -->
+        <div class="mb-5">
+            <h2 class="section-title">Resources & FAQs</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/static/guide.jpg" class="card-img-top" alt="Resources Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Donation Guidelines</h5>
+                            <a href="#" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/static/faq.jpg" class="card-img-top" alt="FAQ Image">
+                        <div class="card-body">
+                            <h5 class="card-title">FAQ</h5>
+                            <a href="#" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/static/contact.jpg" class="card-img-top" alt="Contact Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Contact Us</h5>
+                            <a href="#" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </head>
+    
+    <div class="container" style="padding: 20px; background: #fff; border-radius: 10px; width: 80%; margin: 50px auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <h1 style="text-align: center; color: #333;">Dashboard</h1>
+        <div class="summary" style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+            <div class="box" style="flex: 1; margin: 0 10px; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-align: center;">
+                <!-- Content for this box -->
+            </div>
+            <div class="box" style="flex: 1; margin: 0 10px; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-align: center;">
+                <h3 style="font-size: 1.2em; margin-bottom: 10px; color: #555;">Total Data Records</h3>
+                <p style="font-size: 1.5em; font-weight: bold; color: #333;">{{ total_data }}</p>
+            </div>
+            <div class="box" style="flex: 1; margin: 0 10px; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-align: center;">
+                <h3 style="font-size: 1.2em; margin-bottom: 10px; color: #555;">Total Blocks in Blockchain</h3>
+                <p style="font-size: 1.5em; font-weight: bold; color: #333;">{{ total_blocks }}</p>
+            </div>
+        </div>
+        <div class="actions" style="text-align: center;">
+            <a href="{% url 'volunteer_dashboard' %}" class="btn" style="display: inline-block; margin: 10px; padding: 15px 30px; font-size: 1em; font-weight: bold; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;">Volunteer Dashboard</a>
+            <a href="{% url 'blockchain_view' %}" class="btn" style="display: inline-block; margin: 10px; padding: 15px 30px; font-size: 1em; font-weight: bold; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;">View Blockchain</a>
+            <a href="{% url 'formhandle' %}" class="btn" style="display: inline-block; margin: 10px; padding: 15px 30px; font-size: 1em; font-weight: bold; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;">Add New Data</a>
+        </div>
+    </div>
+
+       <!-- Feedback and Suggestions -->
+
+
+    <!-- Footer -->
+    <div class="footer">
+        &copy; 2024 Charity App. All rights reserved.
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Placeholder for search functionality
+        document.getElementById('search').addEventListener('input', function() {
+            // Add search functionality here
+        });
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("search");
+            const searchResults = document.getElementById("search-results");
+
+            const links = [
+                { name: "New Transaction", url: "/formhandle/" },
+                { name: "Transaction List", url: "/show/" },
+                { name: "Public Ledger", url: "/blockchain_view/" }
+              
+            ];
+
+            searchInput.addEventListener("input", function() {
+                const query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
+                searchResults.style.display = "none";
+
+                if (query) {
+                    const filteredLinks = links.filter(link => link.name.toLowerCase().includes(query));
+                    if (filteredLinks.length > 0) {
+                        searchResults.style.display = "block";
+                        filteredLinks.forEach(link => {
+                            const a = document.createElement("a");
+                            a.href = link.url;
+                            a.textContent = link.name;
+                            searchResults.appendChild(a);
+                        });
+                    }
+                }
+            });
+
+            document.addEventListener("click", function(event) {
+                if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+                    searchResults.style.display = "none";
+                }
+            });
+        });
+
+        
+        // Placeholder for social media feed update
+        // Implement actual social media integration logic here
+    </script>
+</body>
+</html>

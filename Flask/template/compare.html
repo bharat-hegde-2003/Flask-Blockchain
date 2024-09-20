@@ -1,0 +1,81 @@
+<!-- compare_data_with_blockchain.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Data with Blockchain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Comparison Results</h1>
+        {% if differences %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Blockchain Transaction</th>
+                        <th>Database Record</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for diff in differences %}
+                        <tr>
+                            <td>{{ diff.status }}</td>
+                            <td>
+                                <strong>Name:</strong> {{ diff.transaction.name }}<br>
+                                <strong>Method:</strong> {{ diff.transaction.method }}<br>
+                                <strong>Amount:</strong> {{ diff.transaction.amount }}<br>
+                                <strong>Card Number:</strong> {{ diff.transaction.card_num }}<br>
+                                <strong>Date:</strong> {{ diff.transaction.date }}<br>
+                            </td>
+                            <td>
+                                {% if diff.database %}
+                                    <strong>Name:</strong> {{ diff.database.name }}<br>
+                                    <strong>Method:</strong> {{ diff.database.method }}<br>
+                                    <strong>Amount:</strong> {{ diff.database.amount }}<br>
+                                    <strong>Card Number:</strong> {{ diff.database.card_num }}<br>
+                                    <strong>Date:</strong> {{ diff.database.date }}<br>
+                                {% else %}
+                                    <em>Missing in Database</em>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No differences found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

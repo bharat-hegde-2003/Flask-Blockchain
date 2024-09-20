@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockchain Structure</title>
+    <style>
+        /* CSS styles for layout and design */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .block {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .block h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .block p {
+            margin: 5px 0;
+        }
+        .block ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .block li {
+            margin-bottom: 5px;
+        }
+        .block strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Public Ledger: Blockchain Structure</h1>
+    
+    {% if blocks %}
+        {% for block in blocks %}
+            <div class="block">
+                <h3>Block #{{ block.index }}</h3>
+                <p><strong>Timestamp:</strong> {{ block.timestamp }}</p>
+                <p><strong>Transactions:</strong></p>
+                <ul>
+                    {% for transaction in block.data %}
+                        <li>
+                            <strong>Name:</strong> {{ transaction.name }}<br>
+                            <strong>Method:</strong> {{ transaction.method }}<br>
+                            <strong>Amount:</strong> {{ transaction.amount }}<br>
+                            <strong>Card Number:</strong> {{ transaction.card_num }}<br>
+                            <strong>Date:</strong> {{ transaction.date }}<br>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Proof:</strong> {{ block.proof }}</p>
+                <p><strong>Previous Hash:</strong> {{ block.previous_hash }}</p>
+                <p><strong>Hash:</strong> {{ block.compute_hash }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No blocks found.</p>
+    {% endif %}
+    
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .btn {
+            font-size: 0.8rem; /* Reduced font size */
+            padding: 6px 12px; /* Reduced padding */
+            width: auto; /* Adjusted width */
+            margin-bottom: 5px; /* Spacing between buttons */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Blue */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Gray */
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .btn-success {
+            background-color: #28a745; /* Green */
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .btn-info {
+            background-color: #17a2b8; /* Cyan */
+            border-color: #17a2b8;
+            position: fixed; /* Fixed position */
+            top: 20px; /* Distance from top */
+            left: 20px; /* Distance from left */
+        }
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Volunteer Projects Dashboard</h1>
+        <a href="/dashboard/" class="btn btn-info">Go to Dashboard</a>
+        <a href="/enlist_project/" class="btn btn-primary mb-3">Enlist New Project</a>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                        <p class="card-text">Date: {{ project.date }}</p>
+                        <a href="{% url 'volunteer_project_detail' project.id %}" class="btn btn-primary btn-sm mb-2">View Details</a>
+                        <a href="{% url 'sign_up' %}?project_id={{ project.id }}" class="btn btn-success btn-sm mb-2">Sign Up</a>
+                        <a href="{% url 'volunteer_list' project.id %}" class="btn btn-secondary btn-sm mb-2">View Volunteers</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

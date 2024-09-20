@@ -1,0 +1,24 @@
+<!-- create_blockchain.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Blockchain</title>
+</head>
+<body>
+    <h1>Blockchain Created</h1>
+    <p>Blocks:</p>
+    <ul>
+        {% for block in blocks %}
+        <li>
+            <strong>Index:</strong> {{ block.index }}<br>
+            <strong>Timestamp:</strong> {{ block.timestamp }}<br>
+            <strong>Proof:</strong> {{ block.proof }}<br>
+            <strong>Previous Hash:</strong> {{ block.previous_hash }}<br>
+            <strong>Hash:</strong> {{ block.hash }}<br>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('show_blockchain') }}">View Blockchain</a>
+</body>
+</html>

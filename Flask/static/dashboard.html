@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+  
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="summary">
+            <div class="box"> 
+            </div>
+            <div class="box">
+                <h3>Total Data Records</h3>
+                <p>{{ total_data }}</p>
+            </div>
+            <div class="box">
+                <h3>Total Blocks in Blockchain</h3>
+                <p>{{ total_blocks }}</p>
+            </div>
+        </div>
+        <div class="actions">
+            <a href="{% url 'volunteer_dashboard' %}" class="btn">Volunteer Dashboard</a>
+            <a href="{% url 'blockchain_view' %}" class="btn">View Blockchain</a>
+            <a href="{% url 'formhandle' %}" class="btn">Add New Data</a>
+        </div>
+    </div>
+</body>
+</html>

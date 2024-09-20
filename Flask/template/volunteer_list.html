@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enlisted Volunteers</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff; /* White background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow */
+        }
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd; /* Gray border */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Light shadow */
+        }
+        .card-body {
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff; /* Bootstrap primary color */
+            margin-bottom: 20px;
+        }
+        .list-group-item {
+            border-color: #ddd; /* Gray border */
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Enlisted Volunteers for "{{ project.title }}"</h1>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                        <p class="card-text">Date: {{ project.date }}</p>
+                    </div>
+                </div>
+                <h6 class="mt-4 mb-2">Enlisted Volunteers:</h6>
+                <ul class="list-group">
+                    {% for volunteer in volunteers %}
+                    <li class="list-group-item">{{ volunteer.name }} ({{ volunteer.email }})</li>
+                    {% empty %}
+                    <li class="list-group-item">No volunteers enlisted yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
